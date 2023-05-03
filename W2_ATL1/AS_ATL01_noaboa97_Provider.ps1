@@ -8,7 +8,7 @@ New-Item -Path "HKLM:\SOFTWARE\ACME Inc"
 Set-Location -Path "HKLM:\SOFTWARE\ACME Inc"
 
 # Step 3.4
-New-PSDrive -Name "ACME" -PSProvider "FileSystem" -Root "C:\ACME"
+New-PSDrive -Name "ACME" -PSProvider Registry  -Root "HKLM:\SOFTWARE\ACME Inc"
 
 # Step 3.5
 Set-Location -Path "ACME:"
@@ -17,10 +17,11 @@ Set-Location -Path "ACME:"
 New-ItemProperty -Path "." -Name "Zeichenkette1" -Value "Hallo Welt" -PropertyType "String"
 
 # Step 3.7
-Copy-ItemProperty -Path "." -Name "Zeichenkette1" -Destination "." -DestinationName "Zeichenkette"
+New-Item -Path "HKLM:\SOFTWARE\ACME Inc\Zeichenkette"
+Copy-ItemProperty -Path "."  -Destination "Zeichenkette" -Name "Zeichenkette1" 
 
 # Step 3.8
-Rename-ItemProperty -Path "." -Name "Zeichenkette" -NewName "Zeichenkette2"
+Rename-ItemProperty -Path "." -Name "Zeichenkette1" -NewName "Zeichenkette2"
 
 # Step 3.9
 Set-ItemProperty -Path "." -Name "Zeichenkette2" -Value "PowerShell ist toll."
@@ -29,12 +30,13 @@ Set-ItemProperty -Path "." -Name "Zeichenkette2" -Value "PowerShell ist toll."
 Get-Item -Path "." | Select-Object -ExpandProperty Property
 
 # Step 3.11
-Remove-ItemProperty -Path "." -Name *
+Remove-Item "HKLM:\SOFTWARE\ACME Inc\" -Confirm:$false -Recurse
 
 # Step 3.12
 Get-PSDrive
 
 # Step 3.13
+Set-Location C:
 Remove-PSDrive -Name "ACME"
 
 # Step 3.14
