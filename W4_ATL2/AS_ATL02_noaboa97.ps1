@@ -2,11 +2,9 @@
 .SYNOPSIS
 Big Filetypes in Download Folder 
 .DESCRIPTION
-List of files over 100kb in the userhome of the user who runs the script. Groups it by the file type / extension.
+Lists files over 100kb in the userhome of the user who runs the script. Grouped by the file type / extension. 
 .EXAMPLE
-Just run it in the PowerShell 
-.EXAMPLE
-.\<Filename>.ps1
+.\AS_ATL02_noaboa97.ps1
 .NOTES
 CreatDate:  23.05.2023
 Author:     Noah Li Wan Po
